@@ -1,12 +1,14 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-
+const books = require("./app/routes/booksRoute")
+const booksRoute = require("./app/routes/booksRoute");
 const app = express();
-app.use(bodyParser.json()); // ต้องแน่ใจว่าใช้งาน JSON middleware ถูกต้อง
+app.use(express.json()); // ใช้ express.json() แทน bodyParser.json()
 
 app.post("/test", (req, res) => {
-    console.log(req.body); // ตรวจสอบ JSON ที่ส่งมา
-    res.send("OK");
-});
+  console.log(req.body); // ตรวจสอบ JSON ที่ส่งมา
+  res.send("OK");
+}); 
+
+app.use("/api", booksRoute);
 
 app.listen(3000, () => console.log("Server is running on port 3000"));
